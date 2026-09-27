@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-weight: bolder;
+            font-family: 'Playfair Display', serif;
+        }
+        .navbar{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            background: linear-gradient(135deg,#FFFFFF 0%,#FFF9EA 50%,#F2E2B8 100%);
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.30);
+            
+        }
+        .left{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .left img{
+            height: 50px;
+            padding-left: 20px;
+            
+        }
+        .right{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 50%;
+        }
+        .right a{
+            text-decoration: none;
+            color: #102A43;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            
+        }
+        .right a:hover{
+            transform: scale(1.09);
+            border-bottom: 2px solid #C58B19;
+        }
+        .home{
+            padding-top: 20px;
+        }
+        .home img{
+            width: 100%;
+            height: 82vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="left">
+            <img src="{% static 'images/Navlogo.png' %}" alt="PG Logo">
+        </div>
+        <div class="right">
+            <a href="{% url 'add_room_link' %}">Add Room</a>
+            <a href="">Manage Room</a>
+            <a href="{% url 'admin_profile_link' %}">Profile</a>
+        </div>
+    </div>
+    <div class="home">
+        <h1>Welcome to Luxury PG,  {{admin_name}}</h1>
+        <img src="{% static 'images/home.png' %}" alt="homelogo">
+    </div>
+</body>
+</html>
