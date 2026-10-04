@@ -1,22 +1,703 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <center><h1>Admin Login</h1></center>
-    <center>
-        <form action="" method="post">
-        {% csrf_token%}
 
-        <label for="">Email :</label>
-        <input type="email" placeholder="Enter your email" required name="email"> <br>
-        <label for="">Password :</label>
-        <input type="password" placeholder="Enter your password" required name="password"> <br>
-        <button>Login</button>
-    </form>
-    </center>
+    <title>Luxury PG - Admin Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #FFFFFF 0%,
+                    #FFF9EA 50%,
+                    #F2E2B8 100%
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #243B53;
+        }
+
+
+        /* =================================
+           BACKGROUND DECORATION
+        ================================= */
+
+        .circle-one {
+            position: fixed;
+
+            width: 320px;
+            height: 320px;
+
+            border: 1px solid rgba(197, 139, 25, 0.18);
+
+            border-radius: 50%;
+
+            top: -150px;
+            left: -100px;
+        }
+
+
+        .circle-two {
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            border: 1px solid rgba(197, 139, 25, 0.14);
+
+            border-radius: 50%;
+
+            bottom: -250px;
+            right: -180px;
+        }
+
+
+        /* =================================
+           MAIN
+        ================================= */
+
+        .login-wrapper {
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+
+            position: relative;
+        }
+
+
+        /* =================================
+           LOGIN BOX
+        ================================= */
+
+        .login-box {
+
+            width: 850px;
+
+            min-height: 500px;
+
+            background: rgba(255,255,255,0.94);
+
+            border-radius: 24px;
+
+            display: flex;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(197,139,25,0.25);
+
+            box-shadow:
+                0 25px 60px rgba(100, 80, 30, 0.16);
+
+            position: relative;
+
+            z-index: 2;
+
+            animation: appear 0.7s ease;
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+
+        }
+
+
+        /* =================================
+           LEFT DESIGN
+        ================================= */
+
+        .brand-section {
+
+            width: 43%;
+
+            padding: 50px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #FFFDF7,
+                    #F7EBCB
+                );
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        .brand-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(197,139,25,0.20);
+
+            right: -110px;
+
+            top: -70px;
+        }
+
+
+        /* =================================
+           LOGO
+        ================================= */
+
+        .logo {
+
+            width: 68px;
+
+            height: 68px;
+
+            border-radius: 50%;
+
+            border: 2px solid #C58B19;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #C58B19;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            z-index: 2;
+
+            background: #FFFFFF;
+        }
+
+
+        .brand-section h1 {
+
+            font-size: 38px;
+
+            line-height: 1.15;
+
+            font-weight: 600;
+
+            color: #243B53;
+
+            margin-bottom: 16px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .gold-line {
+
+            width: 65px;
+
+            height: 3px;
+
+            background: #C58B19;
+
+            border-radius: 5px;
+
+            margin-bottom: 22px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .brand-section p {
+
+            color: #627D98;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            max-width: 270px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .brand-bottom {
+
+            margin-top: 38px;
+
+            color: #C58B19;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =================================
+           FORM SECTION
+        ================================= */
+
+        .form-section {
+
+            width: 57%;
+
+            padding: 55px 65px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background: #FFFFFF;
+        }
+
+
+        .form-section h2 {
+
+            color: #243B53;
+
+            font-size: 29px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+        }
+
+
+        .form-description {
+
+            color: #829AB1;
+
+            font-size: 14px;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =================================
+           INPUT
+        ================================= */
+
+        .input-group {
+
+            margin-bottom: 22px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #486581;
+
+            margin-bottom: 8px;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-bottom: 1px solid #D9E2EC;
+
+            background: #FCFBF7;
+
+            padding: 0 14px;
+
+            color: #243B53;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s ease;
+        }
+
+
+        input::placeholder {
+
+            color: #9FB3C8;
+        }
+
+
+        input:hover {
+
+            background: #FFFDF8;
+
+            border-bottom-color: #C7B078;
+        }
+
+
+        input:focus {
+
+            background: #FFFDF8;
+
+            border-bottom: 2px solid #C58B19;
+
+            padding-left: 18px;
+        }
+
+
+        /* =================================
+           BUTTON
+        ================================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #243B53,
+                    #334E68
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 7px 18px rgba(36,59,83,0.16);
+        }
+
+
+        .login-btn:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #C58B19,
+                    #D6A53A
+                );
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 22px rgba(197,139,25,0.22);
+        }
+
+
+        .login-btn:active {
+
+            transform: translateY(0);
+        }
+
+
+        /* =================================
+           FOOTER
+        ================================= */
+
+        .secure-text {
+
+            text-align: center;
+
+            margin-top: 27px;
+
+            font-size: 12px;
+
+            color: #9FB3C8;
+        }
+
+
+        .secure-text span {
+
+            color: #C58B19;
+
+            font-weight: 600;
+        }
+
+
+        /* =================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 800px) {
+
+            .login-box {
+
+                width: 470px;
+
+                flex-direction: column;
+            }
+
+
+            .brand-section {
+
+                width: 100%;
+
+                padding: 35px;
+
+                min-height: 260px;
+            }
+
+
+            .brand-section h1 {
+
+                font-size: 30px;
+            }
+
+
+            .brand-bottom {
+
+                margin-top: 20px;
+            }
+
+
+            .form-section {
+
+                width: 100%;
+
+                padding: 40px 35px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .login-wrapper {
+
+                padding: 15px;
+            }
+
+
+            .brand-section {
+
+                padding: 30px 25px;
+            }
+
+
+            .form-section {
+
+                padding: 35px 25px;
+            }
+
+
+            .brand-section h1 {
+
+                font-size: 26px;
+            }
+
+
+            .form-section h2 {
+
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="circle-one"></div>
+<div class="circle-two"></div>
+
+
+<div class="login-wrapper">
+
+
+    <div class="login-box">
+
+
+        <!-- LEFT -->
+
+        <div class="brand-section">
+
+
+            <div class="logo">
+                PG
+            </div>
+
+
+            <h1>
+                Luxury Living,<br>
+                Simply Managed.
+            </h1>
+
+
+            <div class="gold-line"></div>
+
+
+            <p>
+                Premium living. Seamless management.
+            </p>
+
+
+            <div class="brand-bottom">
+                LUXURY PG
+            </div>
+
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="form-section">
+
+
+            <h2>
+                Admin Login
+            </h2>
+
+
+            <p class="form-description">
+                Enter your credentials to continue
+            </p>
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Sign In
+                </button>
+
+
+            </form>
+
+
+            <div class="secure-text">
+
+                Secure access ·
+                <span>Luxury PG Management</span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
 </body>
 </html>

@@ -1,25 +1,548 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Update Profile</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #faf9f5;
+            color: #102A43;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            height: 75px;
+            position: sticky;
+            top: 0px;
+
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
+
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .left img {
+            height: 50px;
+            padding-left: 20px;
+        }
+
+        .right {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            width: 40%;
+        }
+
+        .right a {
+            text-decoration: none;
+            color: #102A43;
+
+            font-weight: 600;
+
+            border-bottom: 2px solid transparent;
+
+            transition: all 0.3s ease;
+        }
+
+        .right a:hover {
+            transform: scale(1.07);
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* ================= PAGE ================= */
+
+        .page {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 45px 20px;
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            width: 520px;
+
+            background: #ffffff;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            border: 1px solid #eee5cf;
+
+            box-shadow:
+                0 10px 30px rgba(16, 42, 67, 0.10);
+        }
+
+
+        /* ================= TITLE ================= */
+
+        .form-card h1 {
+            text-align: center;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 32px;
+
+            color: #102A43;
+
+            margin-bottom: 30px;
+        }
+
+        .form-card h1::after {
+            content: "";
+
+            display: block;
+
+            width: 55px;
+            height: 3px;
+
+            margin: 12px auto 0;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #102A43;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d8d8d8;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            color: #102A43;
+
+            background: #ffffff;
+
+            outline: none;
+
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #C58B19;
+
+            box-shadow:
+                0 0 0 3px rgba(197, 139, 25, 0.10);
+        }
+
+
+        /* ================= FILE INPUT ================= */
+
+        .form-group input[type="file"] {
+            padding: 10px;
+
+            background: #FFF9EA;
+
+            border: 1px dashed #C58B19;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= CURRENT IMAGE ================= */
+
+        .current-image {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .current-image img {
+            width: 110px;
+            height: 110px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 4px solid #F2E2B8;
+
+            padding: 3px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 15px rgba(184, 134, 11, 0.18);
+        }
+
+        .current-image p {
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #718096;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 28px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+        .update-btn {
+            border: none;
+
+            background: #102A43;
+
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #C58B19;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(197, 139, 25, 0.25);
+        }
+
+        .cancel-btn {
+            background: white;
+
+            color: #102A43;
+
+            border: 1px solid #d8d8d8;
+        }
+
+        .cancel-btn:hover {
+            border-color: #C58B19;
+
+            color: #C58B19;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .right {
+                width: 55%;
+            }
+
+            .right a {
+                font-size: 14px;
+            }
+
+            .form-card {
+                width: 100%;
+
+                max-width: 500px;
+
+                padding: 30px 25px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                min-height: 75px;
+
+                height: auto;
+
+                padding: 10px;
+            }
+
+            .left img {
+                height: 42px;
+
+                padding-left: 5px;
+            }
+
+            .right {
+                width: auto;
+
+                gap: 15px;
+            }
+
+            .right a {
+                font-size: 12px;
+            }
+
+            .page {
+                padding: 30px 15px;
+            }
+
+            .form-card {
+                padding: 25px 18px;
+            }
+
+            .form-card h1 {
+                font-size: 28px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-    <center><h1>Update Profile</h1></center>
-    <center>
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="username">Username :</label>
-            <input type="text" id="username" placeholder="Enter your username" required name="username"> <br>
-            <label for="email">Email :</label>
-            <input type="email" id="email" placeholder="Enter your email" required name="email"> <br>
-            <label for="phone">Enter phone :</label>
-            <input type="number" id="phone" placeholder="Enter your Mob number" required name="phone"> <br>
-            <label for="pic">Admin_pic :</label>
-            <input type="file" id="pic" required name="admin_pic"> <br>
-            <button>Update</button>
-        </form>
-    </center>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="left">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="PG Logo"
+            >
+
+        </div>
+
+
+        <div class="right">
+
+            <a href="{% url 'admin_dashboard_link' %}">
+                Back to Dashboard
+            </a>
+
+            <a href="{% url 'admin_profile_link' %}">
+                Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= UPDATE PROFILE ================= -->
+
+    <div class="page">
+
+        <div class="form-card">
+
+            <h1>Update Profile</h1>
+
+
+            <!-- CURRENT PROFILE IMAGE -->
+
+            <div class="current-image">
+
+                <img
+                    src="{{admin.admin_pic.url}}"
+                    alt="{{admin.username}}"
+                >
+
+                <p>Current Profile Picture</p>
+
+            </div>
+
+
+            <form
+                action=""
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value="{{admin.username}}"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{admin.email}}"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="{{admin.phone}}"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PROFILE PICTURE -->
+
+                <div class="form-group">
+
+                    <label for="pic">
+                        Profile Picture
+                    </label>
+
+                    <input
+                        type="file"
+                        id="pic"
+                        name="admin_pic"
+                        accept="image/*"
+                    >
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="buttons">
+
+                    <a
+                        href="{% url 'admin_profile_link' %}"
+                        class="btn cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn update-btn"
+                    >
+                        Update Profile
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
 </body>
+
 </html>

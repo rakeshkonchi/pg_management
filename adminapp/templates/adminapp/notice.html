@@ -1,0 +1,900 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luxury PG - Notices</title>
+
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background: #FCFAF5;
+
+            color: #102A43;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        h1,
+        h2,
+        h3 {
+
+            font-family: "Playfair Display", Georgia, serif;
+        }
+
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #FFFFFF 0%,
+                    #FFF9EA 50%,
+                    #F2E2B8 100%
+                );
+            position: sticky;
+            top: 0px;
+
+            box-shadow:
+                0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+
+
+        .left {
+
+            display: flex;
+
+            align-items: center;
+        }
+
+
+        .left img {
+
+            height: 55px;
+
+            padding-left: 20px;
+
+            display: block;
+        }
+
+
+        .right {
+
+            width: 50%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-evenly;
+        }
+
+
+        .right a {
+
+            text-decoration: none;
+
+            color: #102A43;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            padding-bottom: 5px;
+
+            border-bottom: 2px solid transparent;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+
+        .right a:hover {
+
+            transform: scale(1.07);
+
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* =========================================
+           MAIN PAGE
+        ========================================= */
+
+        .page {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 45px 0 60px;
+        }
+
+
+        /* =========================================
+           PAGE HEADING
+        ========================================= */
+
+        .page-heading {
+
+            margin-bottom: 30px;
+        }
+
+
+        .small-title {
+
+            color: #C58B19;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .page-heading h1 {
+
+            color: #102A43;
+
+            font-size: 32px;
+
+            font-weight: 600;
+        }
+
+
+        .heading-line {
+
+            width: 50px;
+
+            height: 3px;
+
+            background: #C58B19;
+
+            border-radius: 5px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================================
+           POST NOTICE CARD
+        ========================================= */
+
+        .post-card {
+
+            background: #FFFFFF;
+
+            border: 1px solid #E8E0CF;
+
+            border-radius: 16px;
+
+            padding: 30px 35px;
+
+            box-shadow:
+                0 8px 28px rgba(16, 42, 67, 0.08);
+
+            margin-bottom: 45px;
+        }
+
+
+        .post-card h2 {
+
+            color: #102A43;
+
+            font-size: 22px;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #486581;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            border: 1px solid #D9E2EC;
+
+            border-radius: 8px;
+
+            background: #FCFBF7;
+
+            color: #102A43;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        input {
+
+            height: 46px;
+
+            padding: 0 13px;
+        }
+
+
+        textarea {
+
+            min-height: 110px;
+
+            padding: 12px 13px;
+
+            resize: vertical;
+        }
+
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color: #9FB3C8;
+        }
+
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #C58B19;
+
+            background: #FFFFFF;
+
+            box-shadow:
+                0 0 0 3px rgba(197, 139, 25, 0.10);
+        }
+
+
+        /* =========================================
+           POST BUTTON
+        ========================================= */
+
+        .post-btn {
+
+            border: none;
+
+            padding: 11px 25px;
+
+            border-radius: 8px;
+
+            background: #102A43;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .post-btn:hover {
+
+            background: #C58B19;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(197, 139, 25, 0.22);
+        }
+
+
+        /* =========================================
+           NOTICE SECTION
+        ========================================= */
+
+        .notice-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+
+        .notice-heading h2 {
+
+            font-size: 24px;
+
+            font-weight: 600;
+
+            color: #102A43;
+        }
+
+
+        .notice-count {
+
+            color: #829AB1;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           NOTICE GRID
+        ========================================= */
+
+        .notice-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 22px;
+        }
+
+
+        /* =========================================
+           NOTICE CARD
+        ========================================= */
+
+        .notice-card {
+
+            background: #FFFFFF;
+
+            border: 1px solid #E8E0CF;
+
+            border-radius: 14px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 7px 22px rgba(16, 42, 67, 0.07);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+
+        .notice-card:hover {
+
+            transform: translateY(-4px);
+
+            border-color: #D5B76A;
+
+            box-shadow:
+                0 13px 28px rgba(16, 42, 67, 0.11);
+        }
+
+
+        /* =========================================
+           NOTICE TITLE
+        ========================================= */
+
+        .notice-card h3 {
+
+            color: #102A43;
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+        }
+
+
+        .notice-card h3::before {
+
+            content: "";
+
+            display: inline-block;
+
+            width: 4px;
+
+            height: 20px;
+
+            background: #C58B19;
+
+            border-radius: 5px;
+
+            margin-right: 9px;
+
+            vertical-align: -3px;
+        }
+
+
+        /* =========================================
+           DESCRIPTION
+        ========================================= */
+
+        .notice-description {
+
+            color: #627D98;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            font-weight: 400;
+
+            margin-bottom: 18px;
+
+            word-wrap: break-word;
+        }
+
+
+        /* =========================================
+           NOTICE FOOTER
+        ========================================= */
+
+        .notice-footer {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-top: 14px;
+
+            border-top: 1px solid #EEF0F2;
+        }
+
+
+        .notice-date {
+
+            color: #829AB1;
+
+            font-size: 12px;
+
+            font-weight: 500;
+        }
+
+
+        .delete-btn {
+
+            border: 1px solid #C58B19;
+
+            background: transparent;
+
+            color: #102A43;
+
+            padding: 7px 14px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        .delete-btn:hover {
+
+            background: #C58B19;
+
+            color: white;
+        }
+
+
+        /* =========================================
+           NO NOTICE
+        ========================================= */
+
+        .no-notice {
+
+            background: #FFFFFF;
+
+            border: 1px solid #E8E0CF;
+
+            border-radius: 14px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            color: #829AB1;
+        }
+
+
+        .no-notice h3 {
+
+            color: #102A43;
+
+            margin-bottom: 7px;
+
+            font-size: 20px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .right {
+
+                width: 65%;
+            }
+
+
+            .right a {
+
+                font-size: 15px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                height: auto;
+
+                min-height: 75px;
+
+                padding: 10px 0;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+
+            .left img {
+
+                padding-left: 0;
+            }
+
+
+            .right {
+
+                width: 100%;
+
+                flex-wrap: wrap;
+
+                gap: 15px;
+
+                padding-bottom: 8px;
+            }
+
+
+            .page {
+
+                width: 92%;
+
+                padding-top: 30px;
+            }
+
+
+            .post-card {
+
+                padding: 25px 20px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .right {
+
+                gap: 10px;
+            }
+
+
+            .right a {
+
+                font-size: 13px;
+            }
+
+
+            .page-heading h1 {
+
+                font-size: 27px;
+            }
+
+
+            .notice-heading {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <div class="navbar">
+
+        <div class="left">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="PG Logo"
+            >
+
+        </div>
+
+
+        <div class="right">
+
+            <a href="{% url 'add_room_link' %}">
+                Add Room
+            </a>
+
+            <a href="">
+                Manage Room
+            </a>
+
+            <a href="{% url 'notice_link' %}">
+                Notice
+            </a>
+
+            <a href="{% url 'admin_profile_link' %}">
+                Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <div class="page">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <p class="small-title">
+                PROPERTY MANAGEMENT
+            </p>
+
+            <h1>
+                Notices
+            </h1>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             POST NOTICE
+        ====================================== -->
+
+        <div class="post-card">
+
+            <h2>
+                Post New Notice
+            </h2>
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label>
+                        Notice Title
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="Enter title"
+                        required
+                        name="title"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        required
+                        placeholder="Enter notice description"
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="post-btn"
+                >
+                    Post Notice
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =====================================
+             EXISTING NOTICES
+        ====================================== -->
+
+        <div class="notice-heading">
+
+            <h2>
+                Posted Notices
+            </h2>
+
+            <span class="notice-count">
+                Your PG announcements
+            </span>
+
+        </div>
+
+
+
+        <div class="notice-grid">
+
+            {% for i in notice %}
+
+            <div class="notice-card">
+
+
+                <h3>
+                    {{ i.title }}
+                </h3>
+
+
+                <p class="notice-description">
+                    {{ i.description }}
+                </p>
+
+
+                <div class="notice-footer">
+
+                    <span class="notice-date">
+                        {{ i.created_at }}
+                    </span>
+
+
+                    <button class="delete-btn">
+                        Delete
+                    </button>
+
+                </div>
+
+
+            </div>
+
+            {% empty %}
+
+            <div class="no-notice">
+
+                <h3>
+                    No Notices Yet
+                </h3>
+
+                <p>
+                    Post your first announcement above.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

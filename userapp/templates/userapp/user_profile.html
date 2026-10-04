@@ -1,0 +1,424 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Profile</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #faf9f5;
+            color: #102A43;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            position: sticky;
+            top: 0;
+
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
+
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .left img {
+            height: 50px;
+            padding-left: 20px;
+        }
+
+        .right {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 40%;
+        }
+
+        .right a {
+            text-decoration: none;
+            color: #102A43;
+            font-weight: 600;
+
+            border-bottom: 2px solid transparent;
+
+            transition: all 0.3s ease;
+        }
+
+        .right a:hover {
+            transform: scale(1.07);
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* ================= PROFILE PAGE ================= */
+
+        .profile-page {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* ================= PROFILE CARD ================= */
+
+        .profile-card {
+            width: 500px;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 30px rgba(16, 42, 67, 0.10);
+
+            border: 1px solid #eee5cf;
+        }
+
+
+        /* ================= TITLE ================= */
+
+        .profile-card h1 {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 32px;
+
+            margin-bottom: 30px;
+
+            color: #102A43;
+        }
+
+        .profile-card h1::after {
+            content: "";
+
+            display: block;
+
+            width: 55px;
+            height: 3px;
+
+            margin: 12px auto 0;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+        }
+
+
+        /* ================= USER NAME ================= */
+
+        .profile-info {
+            margin-top: 10px;
+        }
+
+        .profile-info h2 {
+            font-size: 26px;
+
+            color: #102A43;
+
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            font-size: 16px;
+
+            color: #607080;
+
+            margin: 8px 0;
+        }
+
+
+        /* ================= DETAIL BOXES ================= */
+
+        .details {
+            margin-top: 25px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .detail {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 14px 18px;
+
+            background: #FFF9EA;
+
+            border-radius: 10px;
+
+            border: 1px solid #F2E2B8;
+
+            text-align: left;
+        }
+
+        .detail span:first-child {
+            font-weight: 600;
+
+            color: #607080;
+
+            min-width: 80px;
+        }
+
+        .detail span:last-child {
+            font-weight: 600;
+
+            color: #102A43;
+
+            word-break: break-word;
+
+            text-align: right;
+        }
+
+
+        /* ================= UPDATE BUTTON ================= */
+
+        .update-btn {
+            display: inline-block;
+
+            margin-top: 28px;
+
+            padding: 12px 28px;
+
+            background: #102A43;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+        }
+
+        .update-btn:hover {
+            background: #C58B19;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(197, 139, 25, 0.25);
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .right {
+                width: 55%;
+            }
+
+            .right a {
+                font-size: 14px;
+            }
+
+            .profile-card {
+                width: 100%;
+
+                max-width: 450px;
+
+                padding: 30px 20px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                height: auto;
+
+                min-height: 75px;
+
+                padding: 10px;
+            }
+
+            .left img {
+                height: 42px;
+
+                padding-left: 5px;
+            }
+
+            .right {
+                width: auto;
+
+                gap: 15px;
+            }
+
+            .right a {
+                font-size: 12px;
+            }
+
+            .profile-page {
+                padding: 30px 15px;
+            }
+
+            .profile-card h1 {
+                font-size: 28px;
+            }
+
+            .detail {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+            }
+
+            .detail span:last-child {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="left">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="PG Logo"
+            >
+
+        </div>
+
+
+        <div class="right">
+
+            <a href="{% url 'user_dashboard_link' %}">
+                Back to Dashboard
+            </a>
+
+            <a href="{% url 'user_profile_update_link' %}">
+                Update Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <div class="profile-page">
+
+        <div class="profile-card">
+
+            <h1>User Profile</h1>
+
+
+            <!-- USER NAME -->
+
+            <div class="profile-info">
+
+                <h2>{{ user.username }}</h2>
+
+                <p>PG Resident</p>
+
+            </div>
+
+
+            <!-- SIGNUP DETAILS -->
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>Username</span>
+
+                    <span>{{ user.username }}</span>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>Email</span>
+
+                    <span>{{ user.email }}</span>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>Phone</span>
+
+                    <span>{{ user.phone }}</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPDATE -->
+
+            <a
+                href="{% url 'user_profile_update_link' %}"
+                class="update-btn"
+            >
+                Update User Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,406 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
+
+            color: #102A43;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 75px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 25px;
+
+            background: rgba(255, 255, 255, 0.85);
+
+            box-shadow:
+                0 5px 20px rgba(184, 134, 11, 0.20);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #102A43;
+
+            font-weight: 600;
+
+            border-bottom: 2px solid transparent;
+
+            padding-bottom: 4px;
+
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.06);
+
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* ================= LOGIN PAGE ================= */
+
+        .login-page {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 20px;
+        }
+
+
+        /* ================= LOGIN CARD ================= */
+
+        .login-card {
+            width: 430px;
+
+            background: #ffffff;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            border: 1px solid #eee5cf;
+
+            box-shadow:
+                0 12px 35px rgba(16, 42, 67, 0.12);
+        }
+
+
+        /* ================= TITLE ================= */
+
+        .login-card h1 {
+            text-align: center;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 32px;
+
+            color: #102A43;
+
+            margin-bottom: 8px;
+        }
+
+        .login-card h1::after {
+            content: "";
+
+            display: block;
+
+            width: 55px;
+            height: 3px;
+
+            margin: 12px auto 0;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #718096;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #102A43;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d8d8d8;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            color: #102A43;
+
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #C58B19;
+
+            box-shadow:
+                0 0 0 3px rgba(197, 139, 25, 0.10);
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #102A43;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #C58B19;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(197, 139, 25, 0.25);
+        }
+
+
+        /* ================= SIGNUP ================= */
+
+        .signup {
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 14px;
+
+            color: #718096;
+        }
+
+        .signup a {
+            color: #C58B19;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo img {
+                height: 42px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .login-card {
+                width: 100%;
+
+                max-width: 430px;
+
+                padding: 30px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="PG Logo"
+            >
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="{% url 'user_signup_link' %}">
+                Sign Up
+            </a>
+
+            <a href="{% url 'admin_login_link' %}">
+                Admin
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <div class="login-page">
+
+        <div class="login-card">
+
+            <h1>User Login</h1>
+
+            <p class="subtitle">
+                Welcome back to your PG
+            </p>
+
+
+            <form action="" method="post">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <div class="signup">
+
+                Don't have an account?
+
+                <a href="{% url 'user_signup_link' %}">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
