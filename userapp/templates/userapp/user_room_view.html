@@ -1,0 +1,582 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Room Details</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #faf9f5;
+            color: #102A43;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            height: 75px;
+            position: sticky;
+            top: 0px;
+
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
+
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .left img {
+            height: 50px;
+            padding-left: 20px;
+        }
+        .logo-name {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            color: #102A43;
+        }
+
+        .right {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            width: 40%;
+        }
+
+        .right a {
+            text-decoration: none;
+            color: #102A43;
+
+            font-weight: 600;
+
+            border-bottom: 2px solid transparent;
+
+            transition: all 0.3s ease;
+        }
+
+        .right a:hover {
+            transform: scale(1.07);
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* ================= PAGE ================= */
+
+        .page {
+            min-height: calc(100vh - 75px);
+
+            padding: 50px 20px;
+        }
+
+
+        /* ================= HEADING ================= */
+
+        .page-title {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 34px;
+
+            color: #102A43;
+        }
+
+        .page-title h1::after {
+            content: "";
+
+            display: block;
+
+            width: 55px;
+            height: 3px;
+
+            margin: 12px auto 0;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+        }
+
+
+        /* ================= ROOM CARD ================= */
+
+        .room-card {
+            max-width: 950px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 45% 55%;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid #eee5cf;
+
+            box-shadow:
+                0 10px 30px rgba(16, 42, 67, 0.10);
+        }
+
+
+        /* ================= IMAGE ================= */
+
+        .room-image {
+            min-height: 480px;
+
+            background: #FFF9EA;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+
+            max-height: 430px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+        }
+
+
+        /* ================= ROOM CONTENT ================= */
+
+        .room-content {
+            padding: 40px;
+        }
+
+        .room-number {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 30px;
+
+            color: #102A43;
+
+            margin-bottom: 8px;
+        }
+
+        .room-subtitle {
+            color: #718096;
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= DETAILS ================= */
+
+        .details {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .detail {
+            padding: 16px;
+
+            background: #FFF9EA;
+
+            border: 1px solid #F2E2B8;
+
+            border-radius: 10px;
+        }
+
+        .detail-label {
+            display: block;
+
+            font-size: 13px;
+
+            color: #718096;
+
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            display: block;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            color: #102A43;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            background: #FFF9EA;
+
+            color: #C58B19;
+
+            border: 1px solid #F2E2B8;
+
+            font-weight: 600;
+        }
+
+
+        /* ================= DESCRIPTION ================= */
+
+        .description {
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #eee5cf;
+        }
+
+        .description h3 {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 21px;
+
+            margin-bottom: 10px;
+        }
+
+        .description p {
+            color: #607080;
+
+            line-height: 1.7;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .book-button {
+            display: block;
+
+            width: fit-content;
+
+            margin: 30px auto 0;
+
+            padding: 12px 28px;
+
+            background: #102A43;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+        }
+
+        .book-button:hover {
+            background: #C58B19;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(197, 139, 25, 0.25);
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            .right {
+                width: 50%;
+            }
+
+            .room-card {
+                grid-template-columns: 1fr;
+            }
+
+            .room-image {
+                min-height: 350px;
+            }
+
+            .room-content {
+                padding: 30px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                height: auto;
+
+                min-height: 75px;
+
+                padding: 10px;
+            }
+
+            .left img {
+                height: 42px;
+
+                padding-left: 5px;
+            }
+
+            .right {
+                width: auto;
+
+                gap: 15px;
+            }
+
+            .right a {
+                font-size: 12px;
+            }
+
+            .page {
+                padding: 30px 15px;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+            .room-content {
+                padding: 25px 20px;
+            }
+
+            .room-number {
+                font-size: 26px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .room-image {
+                min-height: 280px;
+
+                padding: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="left">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="PG Logo"
+            >
+            <div class="logo-name">
+                Luxury PG
+            </div>
+
+        </div>
+
+
+        <div class="right">
+
+            <a href="{% url 'user_dashboard_link' %}">
+                Back to Dashboard
+            </a>
+
+            <a href="{% url 'user_profile_link' %}">
+                Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= ROOM DETAILS ================= -->
+
+    <div class="page">
+
+
+        <div class="page-title">
+
+            <h1>Room Details</h1>
+
+        </div>
+
+
+        <div class="room-card">
+
+
+            <!-- ROOM IMAGE -->
+
+            <div class="room-image">
+
+                <img
+                    src="{{room.room_image.url}}"
+                    alt="Room {{room.room_no}}"
+                >
+
+            </div>
+
+
+            <!-- ROOM INFORMATION -->
+
+            <div class="room-content">
+
+                <h2 class="room-number">
+                    Room No. {{room.room_no}}
+                </h2>
+
+                <p class="room-subtitle">
+                    Detailed information about this room
+                </p>
+
+
+                <div class="details">
+
+
+                    <div class="detail">
+
+                        <span class="detail-label">
+                            Room Type
+                        </span>
+
+                        <span class="detail-value">
+                            {{room.room_type}}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="detail-label">
+                            Floor Number
+                        </span>
+
+                        <span class="detail-value">
+                            {{room.floor}}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="detail-label">
+                            Total Beds
+                        </span>
+
+                        <span class="detail-value">
+                            {{room.total_beds}}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="detail-label">
+                            Monthly Rent
+                        </span>
+
+                        <span class="detail-value">
+                            ₹{{room.monthly_rent}}
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="status">
+
+                    Status: {{room.status}}
+
+                </div>
+
+
+                {% if room.description %}
+
+                <div class="description">
+
+                    <h3>Description</h3>
+
+                    <p>
+                        {{room.description}}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+        <button class="book-button">Book</button>
+
+
+    </div>
+
+
+</body>
+
+</html>

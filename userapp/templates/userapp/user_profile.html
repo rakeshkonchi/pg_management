@@ -47,11 +47,22 @@
         .left {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         .left img {
             height: 50px;
             padding-left: 20px;
+        }
+        .logo-name {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            color: #102A43;
         }
 
         .right {
@@ -211,6 +222,12 @@
             text-align: right;
         }
 
+        .detail img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
 
         /* ================= UPDATE BUTTON ================= */
 
@@ -333,6 +350,9 @@
                 src="{% static 'images/Navlogo.png' %}"
                 alt="PG Logo"
             >
+            <div class="logo-name">
+                Luxury PG
+            </div>
 
         </div>
 
@@ -375,30 +395,86 @@
             <!-- SIGNUP DETAILS -->
 
             <div class="details">
+                <div class="detail">
 
+                    <span>Profile_pic</span>
+
+                    <img src="{{ user_data.profile_pic.url }}" alt="{{user.username}}">
+
+                </div>
                 <div class="detail">
 
                     <span>Username</span>
 
-                    <span>{{ user.username }}</span>
+                    <span>{{ user_data.user.username }}</span>
 
                 </div>
-
-
                 <div class="detail">
 
                     <span>Email</span>
 
-                    <span>{{ user.email }}</span>
+                    <span>{{ user_data.user.email }}</span>
+
+                </div>
+                <div class="detail">
+
+                    <span>Phone</span>
+
+                    <span>{{ user_data.user.phone }}</span>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>City</span>
+
+                    <span>{{ user_data.city }}</span>
 
                 </div>
 
 
                 <div class="detail">
 
-                    <span>Phone</span>
+                    <span>Pincode</span>
 
-                    <span>{{ user.phone }}</span>
+                    <span>{{ user_data.pincode }}</span>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>State</span>
+
+                    <span>{{ user_data.state }}</span>
+
+                </div>
+                <div class="detail">
+
+                    <span>Country</span>
+
+                    <span>{{ user_data.country }}</span>
+
+                </div>
+                <div class="detail">
+
+                    <span>Address</span>
+
+                    <span>{{ user_data.address }}</span>
+
+                </div>
+                <div class="detail">
+
+                    <span>Bio</span>
+
+                    <span>{{ user_data.bio }}</span>
+
+                </div>
+                <div class="detail">
+
+                    <span>Aadhar Number</span>
+
+                    <span>{{ user_data.aadhar_no }}</span>
 
                 </div>
 
@@ -408,10 +484,10 @@
             <!-- UPDATE -->
 
             <a
-                href="{% url 'user_profile_update_link' %}"
+                href="{% url 'user_login_link' %}"
                 class="update-btn"
             >
-                Update User Profile
+                Logout
             </a>
 
         </div>

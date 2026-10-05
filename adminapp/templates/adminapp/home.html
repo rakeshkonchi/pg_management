@@ -1,0 +1,811 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Luxury PG</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+
+            background: #faf9f5;
+
+            color: #102A43;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 75px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            padding: 0 5%;
+
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
+
+            box-shadow:
+                0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+
+
+        /* ================= NAVBAR LEFT ================= */
+
+        .left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .left img {
+
+            height: 50px;
+
+            width: 50px;
+
+            object-fit: contain;
+        }
+
+
+        .logo-name {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            color: #102A43;
+        }
+
+
+        /* ================= NAVBAR RIGHT ================= */
+
+        .right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 35px;
+        }
+
+
+        .right a {
+
+            text-decoration: none;
+
+            color: #102A43;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            border-bottom: 2px solid transparent;
+
+            padding-bottom: 4px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .right a:hover {
+
+            transform: scale(1.07);
+
+            color: #C58B19;
+
+            border-bottom: 2px solid #C58B19;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            min-height: 520px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 50px;
+
+            padding: 70px 7%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #FFFDF7 0%,
+                    #FFF9EA 50%,
+                    #F5E9C8 100%
+                );
+        }
+
+
+        .hero-content {
+
+            flex: 1;
+
+            max-width: 600px;
+        }
+
+
+        .hero-small {
+
+            color: #C58B19;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+
+        .hero h1 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 52px;
+
+            line-height: 1.15;
+
+            color: #102A43;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 span {
+
+            color: #C58B19;
+        }
+
+
+        .hero p {
+
+            color: #607080;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 520px;
+
+            margin-bottom: 30px;
+        }
+
+        /* ================= HERO IMAGE ================= */
+
+        .hero-image {
+
+            flex: 1;
+
+            max-width: 550px;
+
+            height: 360px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            border: 5px solid #ffffff;
+
+            box-shadow:
+                0 15px 35px rgba(16, 42, 67, 0.15);
+        }
+
+
+        .hero-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+
+            padding: 70px 7%;
+
+            background: #faf9f5;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .section-title h2 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 34px;
+
+            color: #102A43;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-line {
+
+            width: 55px;
+
+            height: 3px;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+
+            margin: auto;
+        }
+
+
+        .section-title p {
+
+            color: #718096;
+
+            margin-top: 15px;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= FEATURE CARD ================= */
+
+        .feature-container {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 28px;
+        }
+
+
+        .feature-card {
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            border: 1px solid #eee5cf;
+
+            box-shadow:
+                0 8px 25px rgba(16, 42, 67, 0.08);
+
+            transition: all 0.3s ease;
+        }
+
+
+        .feature-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 30px rgba(16, 42, 67, 0.13);
+        }
+
+
+        .feature-image {
+
+            width: 100%;
+
+            height: 210px;
+
+            overflow: hidden;
+        }
+
+
+        .feature-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: transform 0.4s ease;
+        }
+
+
+        .feature-card:hover
+        .feature-image img {
+
+            transform: scale(1.05);
+        }
+
+
+        .feature-content {
+
+            padding: 25px;
+
+            text-align: center;
+        }
+
+
+        .feature-content h3 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 23px;
+
+            color: #102A43;
+
+            margin-bottom: 10px;
+        }
+
+
+        .feature-content p {
+
+            color: #718096;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #102A43;
+
+            color: #ffffff;
+
+            font-size: 14px;
+        }
+
+
+        .footer span {
+
+            color: #C58B19;
+
+            font-weight: 600;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .right {
+
+                gap: 20px;
+            }
+
+
+            .right a {
+
+                font-size: 14px;
+            }
+
+
+            .hero {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 55px 25px;
+            }
+
+
+            .hero-content {
+
+                max-width: 700px;
+            }
+
+
+            .hero p {
+
+                margin-left: auto;
+
+                margin-right: auto;
+            }
+
+
+            .hero-image {
+
+                width: 100%;
+
+                max-width: 600px;
+            }
+
+
+            .feature-container {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                height: auto;
+
+                min-height: 75px;
+
+                padding: 10px 15px;
+
+                flex-wrap: wrap;
+
+                gap: 10px;
+            }
+
+
+            .left img {
+
+                height: 42px;
+
+                width: 42px;
+            }
+
+
+            .logo-name {
+
+                font-size: 20px;
+            }
+
+
+            .right {
+
+                gap: 15px;
+
+                padding: 0;
+            }
+
+
+            .right a {
+
+                font-size: 13px;
+            }
+
+
+            .hero {
+
+                padding: 45px 20px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 38px;
+            }
+
+
+            .hero p {
+
+                font-size: 15px;
+            }
+
+
+            .hero-image {
+
+                height: 260px;
+            }
+
+
+            .features {
+
+                padding: 50px 20px;
+            }
+
+
+            .feature-container {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+
+        <!-- LEFT: LOGO + NAME -->
+
+        <div class="left">
+
+            <img
+                src="{% static 'images/Navlogo.png' %}"
+                alt="Luxury PG Logo"
+            >
+
+            <div class="logo-name">
+                Luxury PG
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT: NAVIGATION -->
+
+        <div class="right">
+
+            <a href="#">
+                Home
+            </a>
+
+
+            <a href="#features">
+                Facilities
+            </a>
+
+
+            <a href="{% url 'admin_login_link' %}">
+                Admin
+            </a>
+
+
+            <a href="{% url 'user_signup_link' %}">
+                User
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                Premium PG Living
+            </div>
+
+
+            <h1>
+                Comfortable Living,
+                <span>Better Lifestyle.</span>
+            </h1>
+
+
+            <p>
+                Experience a comfortable and secure PG stay
+                with well-maintained rooms, hygienic food,
+                high-speed Wi-Fi and everything you need
+                for a peaceful living experience.
+            </p>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <img
+                src="{% static 'images/Luxury PG.png' %}"
+                alt="Luxury PG"
+            >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features" id="features">
+
+
+        <div class="section-title">
+
+            <h2>
+                Everything You Need
+            </h2>
+
+            <div class="section-line"></div>
+
+            <p>
+                Designed to make your PG stay comfortable
+                and convenient.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-container">
+
+
+            <!-- ROOM -->
+
+            <div class="feature-card">
+
+                <div class="feature-image">
+
+                    <img
+                        src="{% static 'images/room.jpg' %}"
+                        alt="Well Maintained Rooms"
+                    >
+
+                </div>
+
+
+                <div class="feature-content">
+
+                    <h3>
+                        Well-Maintained Rooms
+                    </h3>
+
+                    <p>
+                        Clean, comfortable and spacious rooms
+                        maintained regularly for a pleasant
+                        living experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FOOD -->
+
+            <div class="feature-card">
+
+                <div class="feature-image">
+
+                    <img
+                        src="{% static 'images/food.jpg' %}"
+                        alt="Hygienic Food"
+                    >
+
+                </div>
+
+
+                <div class="feature-content">
+
+                    <h3>
+                        Hygienic Food
+                    </h3>
+
+                    <p>
+                        Fresh and hygienically prepared meals
+                        with a focus on quality, taste and
+                        nutrition.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WIFI -->
+
+            <div class="feature-card">
+
+                <div class="feature-image">
+
+                    <img
+                        src="{% static 'images/wifi.jpg' %}"
+                        alt="Free WiFi"
+                    >
+
+                </div>
+
+
+                <div class="feature-content">
+
+                    <h3>
+                        Free Wi-Fi
+                    </h3>
+
+                    <p>
+                        Stay connected with reliable high-speed
+                        Wi-Fi for work, study and entertainment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        <p>
+            © 2026 <span>Luxury PG</span>.
+            Comfortable living, better lifestyle.
+        </p>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -37,31 +37,44 @@
         /* ================= NAVBAR ================= */
 
         .navbar {
-            height: 75px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 75px;
+            position: sticky;
+            top: 0;
 
-            padding: 0 25px;
+            background: linear-gradient(
+                135deg,
+                #FFFFFF 0%,
+                #FFF9EA 50%,
+                #F2E2B8 100%
+            );
 
-            background: rgba(255, 255, 255, 0.85);
-
-            box-shadow:
-                0 5px 20px rgba(184, 134, 11, 0.20);
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.30);
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo img {
             height: 50px;
         }
+        .logo-name {
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 30px;
+            font-family: 'Playfair Display', serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            color: #102A43;
         }
 
         .nav-links a {
+            margin-right: 40px;
             text-decoration: none;
 
             color: #102A43;
@@ -304,6 +317,9 @@
                 src="{% static 'images/Navlogo.png' %}"
                 alt="PG Logo"
             >
+            <div class="logo-name">
+                Luxury PG
+            </div>
 
         </div>
 
@@ -312,10 +328,6 @@
 
             <a href="{% url 'user_signup_link' %}">
                 Sign Up
-            </a>
-
-            <a href="{% url 'admin_login_link' %}">
-                Admin
             </a>
 
         </div>

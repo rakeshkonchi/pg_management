@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from adminapp.models import Admin,Room,Notice
 
+def homepage(request):
+   return render(request,"adminapp/home.html")
+
 def login(request):
     if request.method == 'POST':
 
@@ -102,24 +105,10 @@ def addRoom(request):
 #   return render(request,"adminapp/room_detail.html",{"room":room})
 
 def roomDetail(request, id):
-    room = Room.objects.get(id=id)
     if "admin_name" in request.session:
         dashboard_url = "admin_dashboard_link"
-
-    elif "user_id" in request.session:
-        dashboard_url = "user_dashboard_link"
-
-    else:
-        return redirect("user_login_link")
-
-    return render(
-        request,
-        "adminapp/room_detail.html",
-        {
-            "room": room,
-            "dashboard_url": dashboard_url
-        }
-    )
+    room = Room.objects.get(id=id)
+    return render(request,"adminapp/room_detail.html",{"room": room,})
 
 def notice(request):
   if "admin_name" not in request.session:

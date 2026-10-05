@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from adminapp.views import login,dashboard,adminprofile,adminprofileupdate,addRoom,roomDetail,notice,logout
-from userapp.views import user_signup,user_login,user_dashboard,user_profile,user_profile_update
+from adminapp.views import homepage,login,dashboard,adminprofile,adminprofileupdate,addRoom,roomDetail,notice,logout
+from userapp.views import user_signup,user_login,user_dashboard,user_profile,user_profile_update,user_room_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',homepage,name='homepage_link'),
     path('admin_login/',login, name='admin_login_link'),
     path('admin_dashboard/', dashboard, name = 'admin_dashboard_link'),
     path('admin_profile/',adminprofile,name='admin_profile_link'),
@@ -36,6 +37,7 @@ urlpatterns = [
     path("user_dashboard/",user_dashboard,name="user_dashboard_link"),
     path("user_profile_update/",user_profile_update,name="user_profile_update_link"),
     path("user_profile/",user_profile,name="user_profile_link"),
+    path("user_room_view/<int:id>/",user_room_view,name="user_room_view_link"),
 ]
 if settings.DEBUG:
 

@@ -49,20 +49,59 @@ def user_profile(request):
 
     user_id = request.session.get("user_id")
 
-    user = User.objects.get(id=user_id)
+    user_data = UserProfile.objects.filter(user_id=user_id).first()
 
     return render(
         request,
         "userapp/user_profile.html",
         {
-            "user": user
+            "user_data": user_data
         }
     )
+# def user_profile_update(request):
+#     if "user_id" not in request.session:
+#         return redirect("user_login_link")
+#     if request.method == "POST":
+#         city = request.POST.get("city")
+#         pincode = request.POST.get("pincode")
+#         state = request.POST.get("state")
+#         country = request.POST.get("country")
+#         address = request.POST.get("address")
+#         bio = request.POST.get("bio")
+#         aadhar_no = request.POST.get("aadhar_no")
+#         aadhar_image = request.FILES.get("aadhar_image")
+#         profile_pic = request.FILES.get("profile_pic")
+
+#         user_id = request.session.get("user_id")
+#         user = User.objects.get(id=user_id)
+
+#         UserProfile.objects.create(
+#             user=user,
+#             city=city,
+#             pincode=pincode,
+#             state=state,
+#             country=country,
+#             address=address,
+#             bio=bio,
+#             aadhar_no=aadhar_no,
+#             aadhar_image=aadhar_image,
+#             profile_pic=profile_pic
+#         )     
+#         return redirect("user_profile_link")
+    
+#     return render(request, "userapp/user_profile_update.html")
 
 def user_profile_update(request):
+
     if "user_id" not in request.session:
         return redirect("user_login_link")
+
+    user_id = request.session.get("user_id")
+
+    user_data = UserProfile.objects.filter(user_id=user_id).first()
+
     if request.method == "POST":
+
         city = request.POST.get("city")
         pincode = request.POST.get("pincode")
         state = request.POST.get("state")
@@ -70,24 +109,56 @@ def user_profile_update(request):
         address = request.POST.get("address")
         bio = request.POST.get("bio")
         aadhar_no = request.POST.get("aadhar_no")
+
         aadhar_image = request.FILES.get("aadhar_image")
         profile_pic = request.FILES.get("profile_pic")
 
-        user_id = request.session.get("user_id")
-        user = User.objects.get(id=user_id)
+        if user_data:
+            user_data.city = city
+            user_data.pincode = pincode
+            user_data.state = state
+            user_data.country = country
+            user_data.address = address
+            user_data.bio = bio
+            user_data.aadhar_no = aadhar_no
 
-        UserProfile.objects.create(
-            user=user,
-            city=city,
-            pincode=pincode,
-            state=state,
-            country=country,
-            address=address,
-            bio=bio,
-            aadhar_no=aadhar_no,
-            aadhar_image=aadhar_image,
-            profile_pic=profile_pic
-        )     
+            if aadhar_image:
+                user_data.aadhar_image = aadhar_image
+
+            if profile_pic:
+                user_data.profile_pic = profile_pic
+
+            user_data.save()
+
+        else:
+            user = User.objects.get(id=user_id)
+
+            UserProfile.objects.create(
+                user=user,
+                city=city,
+                pincode=pincode,
+                state=state,
+                country=country,
+                address=address,
+                bio=bio,
+                aadhar_no=aadhar_no,
+                aadhar_image=aadhar_image,
+                profile_pic=profile_pic
+            )
+
         return redirect("user_profile_link")
-    
-    return render(request, "userapp/user_profile_update.html")
+
+    return render(
+        request,
+        "userapp/user_profile_update.html",
+        {
+            "user_data": user_data
+        }
+    )
+
+def user_room_view(request,id):
+    if "user_id" not in request.session:
+        return redirect("user_login_link")
+    room = Room.objects.get(id=id)
+    return render(request,"userapp/user_room_view.html",
+    {"room":room})
