@@ -1,4 +1,5 @@
 from django.db import models
+from adminapp.models import Room,Bed
 
 class User(models.Model):
   username = models.CharField(max_length=200)
@@ -23,3 +24,23 @@ class UserProfile(models.Model):
   
   def __str__(self):
     return f"{self.user.username} Profile"
+
+class Booking(models.Model):
+  user = models.ForeignKey(User,on_delete=models.CASCADE)
+  room = models.ForeignKey(Room,on_delete=models.CASCADE)
+  bed = models.ForeignKey(Bed,on_delete=models.CASCADE)
+  booking_date = models.DateTimeField(auto_now_add=True)
+  status = models.CharField(max_length=200,default="Pending")
+
+  def __str__(self):
+    return f"{self.user.username} - {self.room.room_no} -{self.bed.bed_no}"
+
+class Complaint(models.Model):
+  user = models.ForeignKey(User,on_delete=models.CASCADE)
+  title = models.CharField(max_length=200)
+  description = models.TextField()
+  complaint_date = models.DateTimeField(auto_now_add=True)
+  status = models.CharField(max_length=200,default="Not Resolved")
+
+  def __str__(self):
+    return f"{self.user.username} Made a Complaint"

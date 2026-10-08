@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from adminapp.models import Admin,Room,Notice
+from userapp.models import Booking
 
 def homepage(request):
    return render(request,"adminapp/home.html")
@@ -125,3 +126,37 @@ def notice(request):
 def logout(request):
    request.session.flush()
    return redirect("admin_login_link")
+
+def room_requests(request):
+   if "admin_name" not in request.session:
+       return redirect("admin_login_link")
+   bookings = Booking.objects.all().order_by("-booking_date")
+   return render(request,"adminapp/room_requests.html",
+    {"bookings":bookings})
+
+def approveBooking(request,id):
+   if "admin_name" not in request.session:
+       return redirect("admin_login_link")
+   if request.method == 'POST':
+      booking = Booking.objects.get(id=id)
+      if booking.status=="Pending":
+         if booking.bed.status=="Available":
+            booking.status="Approved"
+            booking.save()
+            booking.bed.status="Booked"
+            booking.bed.save()
+            return redirect("room_requests_link")
+         else:
+            return HttpResponse("Bed is not available")
+      return redirect("room_requests_link")
+
+def rejectBooking(request,id):
+   if "admin_name" not in request.session:
+       return redirect("admin_login_link")
+   if request.method == 'POST':
+      booking = Booking.objects.get(id=id)
+      if booking.status=="Pending":
+         booking.status="Rejected"
+         booking.save()
+         return redirect("room_requests_link")
+      return redirect("room_requests_link")

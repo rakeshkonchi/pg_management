@@ -34,7 +34,10 @@
 
             height: 75px;
             position: sticky;
-            top: 0px;
+            top: 0;
+            z-index: 100;
+
+            padding: 0 30px;
 
             background: linear-gradient(
                 135deg,
@@ -54,40 +57,38 @@
 
         .left img {
             height: 50px;
-            padding-left: 20px;
+            width: 50px;
+            object-fit: contain;
         }
+
         .logo-name {
-
             font-family: 'Playfair Display', serif;
-
             font-size: 23px;
-
             font-weight: 700;
-
             color: #102A43;
         }
 
         .right {
             display: flex;
-            justify-content: space-evenly;
             align-items: center;
-
-            width: 40%;
+            gap: 35px;
         }
 
         .right a {
             text-decoration: none;
             color: #102A43;
-
             font-weight: 600;
 
             border-bottom: 2px solid transparent;
+
+            padding-bottom: 4px;
 
             transition: all 0.3s ease;
         }
 
         .right a:hover {
             transform: scale(1.07);
+            color: #C58B19;
             border-bottom: 2px solid #C58B19;
         }
 
@@ -96,7 +97,6 @@
 
         .page {
             min-height: calc(100vh - 75px);
-
             padding: 50px 20px;
         }
 
@@ -105,15 +105,12 @@
 
         .page-title {
             text-align: center;
-
             margin-bottom: 35px;
         }
 
         .page-title h1 {
             font-family: 'Playfair Display', serif;
-
             font-size: 34px;
-
             color: #102A43;
         }
 
@@ -165,6 +162,7 @@
             background: #FFF9EA;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -297,26 +295,117 @@
         }
 
 
-        /* ================= BACK BUTTON ================= */
+        /* ================= BEDS SECTION ================= */
 
-        .book-button {
-            display: block;
-
-            width: fit-content;
+        .beds-section {
+            max-width: 950px;
 
             margin: 30px auto 0;
 
-            padding: 12px 28px;
+            padding: 30px;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            border: 1px solid #eee5cf;
+
+            box-shadow:
+                0 10px 30px rgba(16, 42, 67, 0.08);
+        }
+
+        .beds-title {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 25px;
+
+            color: #102A43;
+
+            margin-bottom: 20px;
+        }
+
+        .beds-title::after {
+            content: "";
+
+            display: block;
+
+            width: 45px;
+            height: 3px;
+
+            margin-top: 8px;
+
+            background: #C58B19;
+
+            border-radius: 10px;
+        }
+
+
+        /* ================= BED CARD ================= */
+
+        .bed-list {
+            display: grid;
+
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+
+            gap: 15px;
+        }
+
+        .bed-card {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 18px;
+
+            background: #FFF9EA;
+
+            border: 1px solid #F2E2B8;
+
+            border-radius: 12px;
+        }
+
+        .bed-info h3 {
+            font-size: 16px;
+
+            color: #102A43;
+
+            margin-bottom: 5px;
+        }
+
+        .bed-status {
+            font-size: 13px;
+
+            color: #718096;
+        }
+
+
+        /* ================= BOOK BUTTON ================= */
+
+        .book-button {
+            display: inline-block;
+
+            padding: 10px 18px;
 
             background: #102A43;
 
             color: white;
+
+            border: none;
 
             text-decoration: none;
 
             border-radius: 8px;
 
             font-weight: 600;
+
+            cursor: pointer;
 
             transition: all 0.3s ease;
         }
@@ -330,13 +419,34 @@
                 0 5px 15px rgba(197, 139, 25, 0.25);
         }
 
+        .book-button.disabled {
+            background: #b5b5b5;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* ================= NO BEDS ================= */
+
+        .no-beds {
+            color: #718096;
+
+            font-size: 15px;
+
+            padding: 15px 0;
+        }
+
 
         /* ================= RESPONSIVE ================= */
 
         @media (max-width: 800px) {
 
             .right {
-                width: 50%;
+                gap: 20px;
             }
 
             .room-card {
@@ -350,6 +460,7 @@
             .room-content {
                 padding: 30px;
             }
+
         }
 
 
@@ -360,19 +471,20 @@
 
                 min-height: 75px;
 
-                padding: 10px;
+                padding: 10px 15px;
             }
 
             .left img {
                 height: 42px;
+                width: 42px;
+            }
 
-                padding-left: 5px;
+            .logo-name {
+                font-size: 19px;
             }
 
             .right {
-                width: auto;
-
-                gap: 15px;
+                gap: 12px;
             }
 
             .right a {
@@ -401,9 +513,23 @@
 
             .room-image {
                 min-height: 280px;
-
                 padding: 15px;
             }
+
+            .beds-section {
+                padding: 25px 20px;
+            }
+
+            .bed-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .book-button {
+                width: 100%;
+                text-align: center;
+            }
+
         }
 
     </style>
@@ -424,6 +550,7 @@
                 src="{% static 'images/Navlogo.png' %}"
                 alt="PG Logo"
             >
+
             <div class="logo-name">
                 Luxury PG
             </div>
@@ -446,11 +573,9 @@
     </div>
 
 
-
     <!-- ================= ROOM DETAILS ================= -->
 
     <div class="page">
-
 
         <div class="page-title">
 
@@ -458,6 +583,8 @@
 
         </div>
 
+
+        <!-- ================= ROOM CARD ================= -->
 
         <div class="room-card">
 
@@ -467,8 +594,8 @@
             <div class="room-image">
 
                 <img
-                    src="{{room.room_image.url}}"
-                    alt="Room {{room.room_no}}"
+                    src="{{ room.room_image.url }}"
+                    alt="Room {{ room.room_no }}"
                 >
 
             </div>
@@ -479,13 +606,15 @@
             <div class="room-content">
 
                 <h2 class="room-number">
-                    Room No. {{room.room_no}}
+                    Room No. {{ room.room_no }}
                 </h2>
 
                 <p class="room-subtitle">
                     Detailed information about this room
                 </p>
 
+
+                <!-- ROOM DETAILS -->
 
                 <div class="details">
 
@@ -497,7 +626,7 @@
                         </span>
 
                         <span class="detail-value">
-                            {{room.room_type}}
+                            {{ room.room_type }}
                         </span>
 
                     </div>
@@ -510,7 +639,7 @@
                         </span>
 
                         <span class="detail-value">
-                            {{room.floor}}
+                            {{ room.floor }}
                         </span>
 
                     </div>
@@ -523,7 +652,7 @@
                         </span>
 
                         <span class="detail-value">
-                            {{room.total_beds}}
+                            {{ room.total_beds }}
                         </span>
 
                     </div>
@@ -536,7 +665,7 @@
                         </span>
 
                         <span class="detail-value">
-                            ₹{{room.monthly_rent}}
+                            ₹{{ room.monthly_rent }}
                         </span>
 
                     </div>
@@ -545,12 +674,16 @@
                 </div>
 
 
+                <!-- STATUS -->
+
                 <div class="status">
 
-                    Status: {{room.status}}
+                    Status: {{ room.status }}
 
                 </div>
 
+
+                <!-- DESCRIPTION -->
 
                 {% if room.description %}
 
@@ -559,19 +692,89 @@
                     <h3>Description</h3>
 
                     <p>
-                        {{room.description}}
+                        {{ room.description }}
                     </p>
 
                 </div>
 
                 {% endif %}
 
-
             </div>
 
         </div>
 
-        <button class="book-button">Book</button>
+
+        <!-- ================= AVAILABLE BEDS ================= -->
+
+        <div class="beds-section">
+
+            <h2 class="beds-title">
+                Available Beds
+            </h2>
+
+
+            <div class="bed-list">
+
+                {% for i in beds %}
+
+                    <div class="bed-card">
+
+                        <div class="bed-info">
+
+                            <h3>
+                                Bed Number: {{ i.bed_no }}
+                            </h3>
+
+                            <span class="bed-status">
+                                Status: {{ i.status }}
+                            </span>
+
+                        </div>
+
+
+                        {% if i.status == "Available" %}
+
+                            <form
+                                action="{% url 'book_room_link' room.id i.id %}"
+                                method="post"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="book-button"
+                                >
+                                    Book Now
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <button
+                                type="button"
+                                class="book-button disabled"
+                                disabled
+                            >
+                                Booked
+                            </button>
+
+                        {% endif %}
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="no-beds">
+                        No beds found in this room.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
 
 
     </div>

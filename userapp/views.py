@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from userapp.models import User,UserProfile
-from adminapp.models import Room
+from userapp.models import User,UserProfile,Booking
+from adminapp.models import Room,Bed
 
 def user_signup(request):
     if request.method == 'POST':
@@ -160,5 +160,31 @@ def user_room_view(request,id):
     if "user_id" not in request.session:
         return redirect("user_login_link")
     room = Room.objects.get(id=id)
+    bed = Bed.objects.filter(room = room)
     return render(request,"userapp/user_room_view.html",
-    {"room":room})
+    {"room":room,"beds":bed})
+
+
+def book_room(request,room_id,bed_id):
+    if "user_id" not in request.session:
+            return redirect("user_login_link")
+    if request.method == "POST":
+        user_id = request.session.get("user_id")
+        user = User.objects.get(id = user_id)
+        room = Room.objects.get(id = room_id)
+        bed = Bed.objects.get(id = bed_id)
+
+        existing_booking = Booking.objects.filter(
+            user = user,
+            status__in = ["Pending","Approved"]
+        ).first()
+
+        if existing_booking:
+            return HttpResponse("You already Booked this room")
+        if bed.status != "Available":
+            return HttpResponse("Bed is not available, already booked")
+
+        Booking.objects.create(user=user,room=room,bed=bed,status="Pending")
+
+        return redirect("user_dashboard_link")
+    return redirect("user_dashboard_link")

@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from adminapp.views import homepage,login,dashboard,adminprofile,adminprofileupdate,addRoom,roomDetail,notice,logout
-from userapp.views import user_signup,user_login,user_dashboard,user_profile,user_profile_update,user_room_view
+from adminapp.views import homepage,login,dashboard,adminprofile,adminprofileupdate,addRoom, roomDetail,notice,logout,room_requests,approveBooking,rejectBooking
+from userapp.views import user_signup,user_login,user_dashboard,user_profile,user_profile_update,user_room_view,book_room
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,12 +32,17 @@ urlpatterns = [
     path("room_detail/<int:id>/",roomDetail,name="room_detail_link"),
     path("notice/",notice,name="notice_link"),
     path("logout/",logout,name='logout_link'),
+    path("room_requests/",room_requests,name='room_requests_link'),
+    path("approve_booking/<int:id>/",approveBooking,name='approve_booking_link'),
+    path("reject_booking/<int:id>/",rejectBooking,name='reject_booking_link'),
+
     path('user_signup/',user_signup,name='user_signup_link'),
     path('user_login/',user_login,name='user_login_link'),
     path("user_dashboard/",user_dashboard,name="user_dashboard_link"),
     path("user_profile_update/",user_profile_update,name="user_profile_update_link"),
     path("user_profile/",user_profile,name="user_profile_link"),
     path("user_room_view/<int:id>/",user_room_view,name="user_room_view_link"),
+    path("book_room/<int:room_id>/<int:bed_id>/",book_room,name="book_room_link")
 ]
 if settings.DEBUG:
 
